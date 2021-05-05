@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "48116d46-d56c-4aae-a2d3-da5df62c3fe2",
+		"name": "HR SYSTEM-REST APIs-ENV",
+		"description": "This is a <b>RESTful APIs</b> collection for the project name \"HR SYSTEM\". These APIs uses the below HTTP methods:\n\n<i>\n(i) GET\n(ii) POST\n(iii) PUT\n(iv) PATCH\n(v) DELETE\n</i>\n\nThese RESTful APIs does the following actions on the HR SYSTEM application:\n\n<h3>\n(i) LIST ALL THE USERS FROM THE DATABASE\n(ii) LIST A SINGLE USER FROM THE DATABASE\n(iii) CREATE A NEW USER\n(iv) UPDATE AN EXISTING USER\n(v) DELETE AN EXISTING USER\n(vi) LOGIN AS AN EXISTING USER\n(vii) SIGN UP AS A NEW USER\n</h3>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POSITIVE TEST CASES",
+			"item": [
+				{
+					"name": "LIST USERS-PAGE2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if the status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code name has OK string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+									"});\r",
+									"pm.test(\"Connection is present\", function () {\r",
+									"    pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"});\r",
+									"pm.test(\"Body matches id string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"pm.test(\"Body matches email string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+									"});\r",
+									"pm.test(\"Body matches first_name string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"first_name\");\r",
+									"});\r",
+									"pm.test(\"Body matches last_name string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"last_name\");\r",
+									"});\r",
+									"pm.test(\"Body matches avatar string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"avatar\");\r",
+									"});\r",
+									"pm.test(\"Response body is present & is equal to JSON\", function () {\r",
+									"//    pm.response.to.be.withBody();\r",
+									"    pm.response.to.have.body();\r",
+									"    pm.response.to.have.jsonBody();\r",
+									" });\r",
+									"pm.test(\"validate the first_name at data[3]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[3].first_name).to.eql(\"Byron\");\r",
+									"});\r",
+									"pm.test(\"validate the id at data[4]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[4].id).to.eql(11);\r",
+									"});\r",
+									"pm.test(\"validate the email at data[5]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[5].email).to.eql(\"rachel.howell@reqres.in\");\r",
+									"});\r",
+									"pm.test(\"validate the last_name at data[2]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[2].last_name).to.eql(\"Funke\");\r",
+									"});\r",
+									"pm.test(\"validate the avatar at data[1]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[1].avatar).to.eql(\"https://reqres.in/img/faces/8-image.jpg\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cookie is present\", () => {\r",
+									"    pm.expect(pm.cookies.has('__cfduid')).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cookie value is correct\", () => {\r",
+									"    pm.expect(pm.cookies.get('__cfduid')).to.eql(\"daa9d0dc3529ada17c38800994d0617131619550491\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.unset(\"myProtocol\");\r",
+									"\r",
+									"// pm.environment.get(\"myProtocol\");\r",
+									"\r",
+									"console.log(pm.environment.get(\"myProtocol\"));\r",
+									"\r",
+									"pm.environment.set(\"myProtocol\", \"https\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{myProtocol}}://{{myBaseURL}}/api/users?page=2",
+							"protocol": "{{myProtocol}}",
+							"host": [
+								"{{myBaseURL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						},
+						"description": "This is a <b>RESTful API</b> that returns the data from the database for page#2 using <i>GET</i> method"
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if the status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Status code name has Created string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+									"});\r",
+									"pm.test(\"Connection is present\", function () {\r",
+									"    pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"});\r",
+									"pm.test(\"Body matches id string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"pm.test(\"Body matches name string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"});\r",
+									"pm.test(\"Body matches job string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"job\");\r",
+									"});\r",
+									"pm.test(\"Body matches createdAt string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is present & is equal to JSON\", function () {\r",
+									"//    pm.response.to.be.withBody();\r",
+									"    pm.response.to.have.body();\r",
+									"    pm.response.to.have.jsonBody();\r",
+									" });\r",
+									"pm.test(\"validate the name in response body\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Inna Shuster\");\r",
+									"});\r",
+									"pm.test(\"validate the job in response body\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.job).to.eql(\"API Engineer\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Inna Shuster\",\r\n    \"job\": \"API Engineer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{myProtocol}}://{{myBaseURL}}/{{myEndPoint}}",
+							"protocol": "{{myProtocol}}",
+							"host": [
+								"{{myBaseURL}}"
+							],
+							"path": [
+								"{{myEndPoint}}"
+							]
+						},
+						"description": "This is a RESTful API that creates a new user in the database by using POST method"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if the status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code name has OK string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+									"});\r",
+									"pm.test(\"Connection is present\", function () {\r",
+									"    pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"});\r",
+									"pm.test(\"Body matches name string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"});\r",
+									"pm.test(\"Body matches job string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"job\");\r",
+									"});\r",
+									"pm.test(\"Body matches updatedAt string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"updatedAt\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is present & is equal to JSON\", function () {\r",
+									"//    pm.response.to.be.withBody();\r",
+									"    pm.response.to.have.body();\r",
+									"    pm.response.to.have.jsonBody();\r",
+									" });\r",
+									"pm.test(\"validate the name in response body\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Inna Shuster\");\r",
+									"});\r",
+									"pm.test(\"validate the job in response body\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.job).to.eql(\"API Specialist\");\r",
+									"});\r",
+									"\r",
+									"pm.test.skip(\"Cookie is present\", () => {\r",
+									"    pm.expect(pm.cookies.has('__cfduid')).to.be.true;\r",
+									"});\r",
+									"/*\r",
+									"pm.test(\"Cookie is present\", () => {\r",
+									"    pm.expect(pm.cookies.has('__cfduid')).to.be.true;\r",
+									"});\r",
+									"*/\r",
+									"\r",
+									"// pm.test.skip(\"Cookie is present\", () => {\r",
+									"//    pm.expect(pm.cookies.has('__cfduid')).to.be.true;\r",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"myEndPoint\", \"api/users\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Inna Shuster\",\r\n    \"job\": \"API Specialist\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{myProtocol}}://{{myBaseURL}}/{{myEndPoint}}/783",
+							"protocol": "{{myProtocol}}",
+							"host": [
+								"{{myBaseURL}}"
+							],
+							"path": [
+								"{{myEndPoint}}",
+								"783"
+							]
+						},
+						"description": "This is a RESTful API that update an existing user in the database by using PUT method"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{myProtocol}}://{{myBaseURL}}/api/users/783",
+							"protocol": "{{myProtocol}}",
+							"host": [
+								"{{myBaseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"783"
+							]
+						},
+						"description": "This is a RESTful API that deletes an existing user in the database by using DELETE method"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Verify the response codes from 2XX family', () => {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204])",
+							"})",
+							"",
+							"pm.test(\"Verify if the response is success\", function () {",
+							"    pm.response.to.be.success;",
+							"}); "
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 100ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(100);",
+					"});"
+				]
+			}
+		}
+	]
+}
